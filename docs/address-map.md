@@ -2,6 +2,9 @@ The current setup maps the 65536 available addresses as follows:
 
 - `$0000` - `$7FFF`: 256Kib (32Ki x8-bit) SRAM
   - `$0000` - `$1FFF`: System reserved memory
+    - `$0000` - `$00FF`: Zero-Page space
+    - `$0100` - `$01FF`: 6502 stack space
+    - `$0200` - `$1FFF`: _(Currently unused)_
   - `$2000` - `$7FFF`: General purpose memory
 - `$8000` - `$BBFF`: _(Currently unused)_
 - `$BC00` - `$BC0F`: W65C22 VIA chip
