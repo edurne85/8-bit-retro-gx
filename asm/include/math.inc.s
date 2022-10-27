@@ -1,9 +1,3 @@
-MATH_OP_A = $0200 ; Up to 4 bytes
-MATH_OP_B = $0204 ; Up to 4 bytes
-MATH_OP_C = $0208 ; Up to 4 bytes
-MATH_OP_D = $020C ; Up to 4 bytes
-MATH_RES = $0210 ; Up to 8? bytes
-
 math_add32:
     ;; 32-bit addition: 32-bit + 32-bit = 32-bit w/C
     ; Modified registers: P[0] (carry)
