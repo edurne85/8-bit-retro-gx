@@ -13,7 +13,7 @@ lcd_init:
     ;; Initializes the LCD display with sensible defaults
     ;  Modified registers: P
     ;  Inputs: (none)
-    ;  Max. stack depth: +7 (base call +2, lcd_instruction +5)
+    ;  Max. stack depth: +8 (base call +2, lcd_instruction +5, A register +1)
   pha
   lda #%11111111 ; Set all pins on port B to output
   sta LCD_DDRB
@@ -88,28 +88,28 @@ lcd_print_char:
   sta LCD_PORTA
   rts
 
-lcd_print_str:
-    ;; Sends a string to the LCD display
-    ;  Modified registers: P
-    ;  Inputs:
-    ;       PTR_OP_A: Pointer to null-terminated string (max 255 chars)
-    ;  Max. stack depth: +7 (base call +2, lcd_print_char +3, registers +2)
-  pha
-  phx
-
-  ldx #0
-_lcd_print_str_loop: ; main loop
-  lda (PTR_OP_A),x ; load next character
-  beq _lcd_print_str_done ; check for null terminator
-  jsr lcd_print_char ; print character
-  inx ; increment pointer
-  txa ; check for wrap-around!
-  beq _lcd_print_str_error
-  jmp _lcd_print_str_loop ; continue printing
-
-_lcd_print_str_error:
-    ; If we get here, X register wrapped around before we found a null
-_lcd_print_str_done:
-  plx
-  pla
-  rts
+;lcd_print_str:
+;    ;; Sends a string to the LCD display
+;    ;  Modified registers: P
+;    ;  Inputs:
+;    ;       PTR_OP_A: Pointer to null-terminated string (max 255 chars)
+;    ;  Max. stack depth: +7 (base call +2, lcd_print_char +3, registers +2)
+;  pha
+;  phx
+;
+;  ldx #0
+;_lcd_print_str_loop: ; main loop
+;  lda (PTR_OP_A),x ; load next character
+;  beq _lcd_print_str_done ; check for null terminator
+;  jsr lcd_print_char ; print character
+;  inx ; increment pointer
+;  txa ; check for wrap-around!
+;  beq _lcd_print_str_error
+;  jmp _lcd_print_str_loop ; continue printing
+;
+;_lcd_print_str_error:
+;    ; If we get here, X register wrapped around before we found a null
+;_lcd_print_str_done:
+;  plx
+;  pla
+;  rts

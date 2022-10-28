@@ -6,9 +6,9 @@ This project is primarily a bunch of experiments with the main purpose of deepen
 ## What **not** to expect from this project
 * Any sort of commerically viable product.
 * Any compatibility with existing (past or current) machines.
-** Some degree of compatibility may happen as a side effect from using some similar components, such as the 65C02 chip family. Keep in mind that this is a side effect and not an intentional feature: no effort or thought will be put in this regard, if it happens it just happens.
+  * Some degree of compatibility may happen as a side effect from using some similar components, such as the 65C02 chip family. Keep in mind that this is a side effect and not an intentional feature: no effort or thought will be put in this regard, if it happens it just happens.
 * Anything that makes sense to mass produce.
-** Of course, if someone still wants to mass produce this system, that's up to them. Just because it makes no sense it doesn't mean you can't do it.
+  * Of course, if someone still wants to mass produce this system, that's up to them. Just because it makes no sense it doesn't mean you can't do it.
 
 ## What to expect from this project
 * Things made from scratch whenever viable
