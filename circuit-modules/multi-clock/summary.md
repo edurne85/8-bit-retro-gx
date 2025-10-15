@@ -33,10 +33,10 @@ As long as the halt input is held high (5V), the clock output is forced low (0V)
 
 ## Monitoring LEDs
 
-The module includes several leds to provide visual feedback on its operation: 8 LEDs (3mm THT) help keep track of the mode selected, and a few more (5mm THT) track the RC and manual clock sources, the power status, and the halt status. The color of the LEDs is generally a matter of choice, but that choice can condition the value of the current-limiting resistors used. Also, it's not necessary to drive the LEDs at their full rated current, as long as it's enough to be clearly visible. Here is a table of the LEDs and resistors used in my implementation, and the calculated minium resistor values for their rated current (20 mA for each of them) and forward voltage (assuming a 5V supply):
+The module includes several leds to provide visual feedback on its operation: 8 LEDs (3mm THT) help keep track of the mode selected, and a few more (5mm THT) track the RC and manual clock sources, the power status, and the halt status. The color of the LEDs is generally a matter of choice, but that choice can condition the value of the current-limiting resistors used. Also, it's not necessary to drive the LEDs at their full rated current, as long as it's enough to be clearly visible. Here is a table of the LEDs and resistors used in my implementation, and the calculated minimum resistor values for their rated current (20 mA for each of them) and forward voltage (assuming a 5V supply):
 
-| LED key | Color | Description | Resistor used  | Forward voltage | Min. resistor |
-|---------|-------|-------------|----------------|---------------- |---------------|
+| LED key | Color | Description | Resistor used | Forward voltage | Min. resistor |
+|---------|-------|-------------|---------------|-----------------|---------------|
 | OFF | Orange | Mode 0: Stand by | 470Ω | 2.0V - 2.2V | 150Ω |
 | RC | Green | Mode 1: RC Oscillator | 330Ω | 3.0V - 3.2V | 100Ω |
 | MAN | Yellow | Mode 2: Manual | 470Ω | 2.0V - 2.2V | 150Ω |
