@@ -33,27 +33,29 @@ As long as the halt input is held high (5V), the clock output is forced low (0V)
 
 ## Monitoring LEDs
 
-The module includes several leds to provide visual feedback on its operation: 8 LEDs (3mm THT) help keep track of the mode selected, and a few more (5mm THT) track the RC and manual clock sources, the power status, and the halt status. The color of the LEDs is generally a matter of choice, but that choice can condition the value of the current-limiting resistors used. Also, it's not necessary to drive the LEDs at their full rated current, as long as it's enough to be clearly visible. Here is a table of the LEDs and resistors used in my implementation, and the calculated minium resistor values for their rated current and forward voltage (assuming a 5V supply):
+The module includes several leds to provide visual feedback on its operation: 8 LEDs (3mm THT) help keep track of the mode selected, and a few more (5mm THT) track the RC and manual clock sources, the power status, and the halt status. The color of the LEDs is generally a matter of choice, but that choice can condition the value of the current-limiting resistors used. Also, it's not necessary to drive the LEDs at their full rated current, as long as it's enough to be clearly visible. Here is a table of the LEDs and resistors used in my implementation, and the calculated minium resistor values for their rated current (20 mA for each of them) and forward voltage (assuming a 5V supply):
 
-| LED key | Color | Description | Resistor used | Rated current | Forward voltage | Min. resistor |
-|---------|-------|-------------|---------------|----------------|-----------------|----------------|
-| OFF | Orange | Mode 0: Stand by | 470Ω | 20mA | 2.0V - 2.2V | 150Ω |
-| RC | Green | Mode 1: RC Oscillator | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| MAN | Yellow | Mode 2: Manual | 470Ω | 20mA | 2.0V - 2.2V | 150Ω |
-| C/1 | White | Mode 3: Crystal (direct) | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| C/2 | Blue | Mode 4: Crystal / 2 | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| C/4 | Blue | Mode 5: Crystal / 4 | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| C/16 | Blue | Mode 6: Crystal / 16 | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| C/256 | Blue | Mode 7: Crystal / 256 | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| LPWR | Green | Power indicator | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| LHALT | Red | Halt indicator | 470Ω | 20mA | 2.0V - 2.2V | 150Ω |
-| LP-RC | Green | RC oscillator high | 330Ω | 20mA | 3.0V - 3.2V | 100Ω |
-| LP-M | Yellow | Manual trigger high | 470Ω | 20mA | 2.0V - 2.2V | 150Ω |
+| LED key | Color | Description | Resistor used  | Forward voltage | Min. resistor |
+|---------|-------|-------------|----------------|---------------- |---------------|
+| OFF | Orange | Mode 0: Stand by | 470Ω | 2.0V - 2.2V | 150Ω |
+| RC | Green | Mode 1: RC Oscillator | 330Ω | 3.0V - 3.2V | 100Ω |
+| MAN | Yellow | Mode 2: Manual | 470Ω | 2.0V - 2.2V | 150Ω |
+| C/1 | White | Mode 3: Crystal (direct) | 330Ω | 3.0V - 3.2V | 100Ω |
+| C/2 | Blue | Mode 4: Crystal / 2 | 330Ω | 3.0V - 3.2V | 100Ω |
+| C/4 | Blue | Mode 5: Crystal / 4 | 330Ω | 3.0V - 3.2V | 100Ω |
+| C/16 | Blue | Mode 6: Crystal / 16 | 330Ω | 3.0V - 3.2V | 100Ω |
+| C/256 | Blue | Mode 7: Crystal / 256 | 330Ω | 3.0V - 3.2V | 100Ω |
+| LPWR | Green | Power indicator | 330Ω | 3.0V - 3.2V | 100Ω |
+| LHALT | Red | Halt indicator | 470Ω | 2.0V - 2.2V | 150Ω |
+| LP-RC | Green | RC oscillator high | 330Ω | 3.0V - 3.2V | 100Ω |
+| LP-M | Yellow | Manual trigger high | 470Ω | 2.0V - 2.2V | 150Ω |
 
 Even at the reduced brightness used in my implementation, the LEDs take over 6mA each, and between 2 and 5 of them are on at any given time; so if power and cost efficiency are priorities, omitting them (as well as the decoder IC) is a valid option: this should reduce the power usage as well as the amount of components and the PCB size.
 
 ## Known issues
 
-- **Fatal**: As of this version, the PCB implementation is not working as expected:
-  - The signal for the manual trigger stays on (high) all the time, regardless of the button state. I suspect this is an assembly issue with the button (direction), and should be fixable by de-soldering and resoldering it correctly.
-  - The transistor driving the crystal oscillator output is reversed (the schematic is correct, but the PCB silkscreen swaps the collector and emitter). This should be fixable by desoldering and resoldering the transistor correctly; but the silkscreen on this version of the PCB remains wrong.
+- 🤯 **Fatal**: As of this version, the PCB implementation is not working as expected. Some issues have identified and addressed (see below), but the main output seems to stay permanently high (or blinking rapidly, so far it has been only tested by feeding a led off it). Further debugging is needed to identify and fix the remaining issues.
+
+- ℹ️ **Fixed**: The signal for the manual trigger stayed on (high) all the time, regardless of the button state. The button element was incorrectly placed in the schematic and the PCB, in a way that it was bridging the corresponding input at all times. Current schematic and PCB files have been corrected; but the boards already made still have this issue. A bit of bending on the legs of the push button is needed to make it fit in the fixed orientation on these boards.
+
+- ℹ️ **Fixed**: The transistor driving the crystal oscillator output was reversed (the schematic is correct, but the PCB silkscreen swaps the collector and emitter). The footprint used to generate the PCB was incorrect. By remapping the pins, the current version of the PCB files is corrected; but for boards already made, the position of the transistor is swapped from the shape suggested by the silkscreen. The most reliable way to identify the correct pinout is to check continuity between PCB pads: the collector must be connected to +5V and the emitter must go to the counter's first clock and the decoder's D4 input (pin 1 on the 74HC393 and pin 1 on the 74LS151).
