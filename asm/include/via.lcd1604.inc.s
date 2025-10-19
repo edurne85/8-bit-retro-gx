@@ -1,7 +1,13 @@
-LCD_PORTB = $bc00
-LCD_PORTA = $bc01
-LCD_DDRB = $bc02
-LCD_DDRA = $bc03
+; Specify which VIA chip handles the LCD1604 display
+; All register adddresses are computed from this base address
+LCD_BASE = IO_VIA_0
+
+; VIA chip registers used to handle the LCD1604 display
+; (8-bit mode, using PORTB for data and top 3 bits of PORTA for control)
+LCD_PORTB = LCD_BASE + OFFSET_VIA_PORTB
+LCD_PORTA = LCD_BASE + OFFSET_VIA_PORTA
+LCD_DDRB = LCD_BASE + OFFSET_VIA_DDRB
+LCD_DDRA = LCD_BASE + OFFSET_VIA_DDRA
 
 LCD_E  = %10000000
 LCD_RW = %01000000
