@@ -15,5 +15,4 @@ loop:
 
 message: .asciiz "Hello, World!"
 
-  .include "include/via.lcd1604.inc.s"
   .include "include/core.suffix.s"

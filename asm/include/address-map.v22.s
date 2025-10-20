@@ -29,12 +29,12 @@ VECTOR_816_N_NMI = $FFEA ; NMI vector (65c816, 16-bit mode)
 ; __RESERVED__ = $FFEC ; No reset vector for 16-bit mode, reset always goes to 8-bit mode
 VECTOR_816_N_IRQ = $FFEE ; IRQ vector (65c816, 16-bit mode)
 
-; Addressable chip positions (64 Ki@ layout, v2.1)
+; Addressable chip positions (64 Ki@ layout, v2.2)
 SRAM = $0000 ; Main RAM chip (32 KiB): $0000 - $7FFF
 ; These ranges are defined by the 6502 architecture:
 ; Zero page: $0000 - $00FF (256 bytes)
 ; Stack: $0100 - $01FF (256 bytes)
-SRAM_CORE = SRAM + $0200 ; Reserved for core routines $0200 - $1FFF (7KiB)
+SRAM_CORE = SRAM + $0200 ; Reserved for core routines $0200 - $1FFF (7680 bytes)
 SRAM_USER = SRAM + $2000 ; general-purpose RAM $2000 - $7FFF (24KiB)
 
 ; I/O address space (from $8000 to $9FFF)

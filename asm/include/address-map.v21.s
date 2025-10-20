@@ -3,7 +3,7 @@
 ; - Support up to 3 ROM chips (8KiB each)
 ; - Move I/O space to $8000-$9FFF (8KiB worth of addresses)
 ; - Map up to 16 VIA chips (W65C22) at the start of the I/O space
-; -- Asumes first chip (VIA_0) is present and used for the primary output
+; -- Assumes first chip (VIA_0) is present and used for the primary output
 ; - Add definitions for chip register offsets and system vectors
 
 ; Pre-defined 65c02 addresses:
@@ -38,7 +38,7 @@ SRAM = $0000 ; Main RAM chip (32 KiB): $0000 - $7FFF
 ; These ranges are defined by the 6502 architecture:
 ; Zero page: $0000 - $00FF (256 bytes)
 ; Stack: $0100 - $01FF (256 bytes)
-SRAM_CORE = SRAM + $0200 ; Reserved for core routines $0200 - $1FFF (7KiB)
+SRAM_CORE = SRAM + $0200 ; Reserved for core routines $0200 - $1FFF (7680 bytes)
 SRAM_USER = SRAM + $2000 ; general-purpose RAM $2000 - $7FFF (24KiB)
 
 ; I/O address space (from $8000 to $9FFF)

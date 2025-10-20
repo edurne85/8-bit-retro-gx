@@ -1,5 +1,5 @@
 ; Specify which VIA chip handles the LCD1604 display
-; All register adddresses are computed from this base address
+; All register addresses are computed from this base address
 LCD_BASE = IO_VIA_0
 
 ; VIA chip registers used to handle the LCD1604 display
