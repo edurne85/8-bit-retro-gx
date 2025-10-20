@@ -1,3 +1,5 @@
+`v2.0 2022-10-12`
+
 The current setup maps the 65536 available addresses as follows:
 
 - `$0000` - `$7FFF`: 256Kib (32Ki x8-bit) SRAM
